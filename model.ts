@@ -36,3 +36,20 @@ function filterByStatus(
 ): Task[] {
   return tasks.filter((task) => task.status === status);
 }
+
+
+function advanceTask(tasks: Task[], id: number): Task[] {
+  return tasks.map((task) => {
+    if (task.id !== id) return task;
+
+    const nextStatus: TaskStatus =
+      task.status === "todo"
+        ? "in-progress"
+        : task.status === "in-progress"
+          ? "done"
+          : "done";
+
+    return { ...task, status: nextStatus };
+  });
+}
+
